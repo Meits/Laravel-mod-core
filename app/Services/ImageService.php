@@ -25,7 +25,7 @@ class ImageService
 
         if($image->isValid()) {
             if(!$fileName) {
-                $fileName = str_random(10).'.'.$image->getClientOriginalExtension();
+                $fileName = (10).'.'.$image->getClientOriginalExtension();
             }
             $img = Image::make($image);
 

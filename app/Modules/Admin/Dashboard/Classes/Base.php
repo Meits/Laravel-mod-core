@@ -107,7 +107,7 @@ class Base extends Controller
     {
         return Menu::make('menuRendrer', function($m)  {
 
-            foreach(MenuModel::all() as $item) {
+            foreach(MenuModel::menuByType(MenuModel::MENU_TYPE_ADMIN)->get() as $item) {
 
                 $path = $item->path;
                 if($item->path && $this->checkRoute($item->path)) {

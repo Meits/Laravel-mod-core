@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->call(AddLanguages::class);
         $this->call(PagesTable::class);
         $this->call(CreateSettings::class);
         $this->call(CreateAdminUser::class);
@@ -19,6 +20,5 @@ class DatabaseSeeder extends Seeder
         $this->call(CreateEmailsTable::class);
         $this->call(CreatePermissionsRoles::class);
         $this->call(CreateRolesUsers::class);
-        $this->call(AddLanguages::class);
     }
 }

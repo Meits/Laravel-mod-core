@@ -105,14 +105,19 @@ class ModuleMakeCommand extends Command
      *
      * @return void
      */
-    protected function createMigration() : void
+     protected function createMigration() : void
     {
         $table = Str::plural(Str::snake(class_basename($this->argument('name'))));
+
+        if(!file_exists("App\\Modules\\".trim($this->argument('name'))."\\Migrations")) {
+            mkdir("App\\Modules\\".trim($this->argument('name'))."\\Migrations");
+        }
 
         try {
             $this->call('make:migration', [
                 'name' => "create_{$table}_table",
                 '--create' => $table,
+                '--path' => "App\\Modules\\".trim($this->argument('name'))."\\Migrations"
             ]);
         } catch (\Exception $e) {
             $this->error($e->getMessage());

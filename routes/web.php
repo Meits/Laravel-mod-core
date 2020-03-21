@@ -13,7 +13,6 @@
 
 
 Route::get('/', function () {
-
     return view('welcome');
 });
 
@@ -21,33 +20,32 @@ $modules = config('modular.modules');
 $path = config('modular.path');
 $base_namespace = config('modular.base_namespace');
 
-        if ($modules) {
-            foreach ($modules as $mod => $submodules) {
-                foreach ($submodules as $key => $sub) {
-                    if (is_string($key)) {
-                        $sub = $key;
-                    }
+if ($modules) {
+    foreach ($modules as $mod => $submodules) {
+        foreach ($submodules as $key => $sub) {
+            if (is_string($key)) {
+                $sub = $key;
+            }
 
-                    $relativePath = "/$mod/$sub";
-                    $routesPath = "{$path}{$relativePath}/Routes/web.php";
+            $relativePath = "/$mod/$sub";
+            $routesPath = "{$path}{$relativePath}/Routes/web.php";
 
-                    if (file_exists($routesPath)) {
-                        if($mod != config('modular.groupWithoutPrefix')) {
-                            Route::group(['prefix' => strtolower($mod)], function () use ($mod, $sub, $routesPath) {
-                                Route::namespace("Modules\\$mod\\$sub\\Controllers")
-                                    ->group($routesPath);
-                            });
-                        }
-                        else {
-
-                            Route::namespace("Modules\\$mod\\$sub\\Controllers")
-                                ->group($routesPath);
-                        }
-
-                    }
+            if (file_exists($routesPath)) {
+                if($mod != config('modular.groupWithoutPrefix')) {
+                    Route::group(['prefix' => strtolower($mod)], function () use ($mod, $sub, $routesPath) {
+                        Route::namespace("Modules\\$mod\\$sub\\Controllers")
+                            ->group($routesPath);
+                    });
                 }
+                else {
+                    Route::namespace("Modules\\$mod\\$sub\\Controllers")
+                        ->group($routesPath);
+                }
+
             }
         }
+    }
+}
 
 
 

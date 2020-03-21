@@ -14,14 +14,36 @@ class CreateEmailsTable extends Seeder
     {
         DB::table('emails')->insert([
             'title' => 'Confirm registration',
-            'template' => '----',
             'type' => 1,
         ]);
 
         DB::table('emails')->insert([
             'title' => 'Reset Password',
-            'template' => '----',
             'type' => 2,
+        ]);
+
+        DB::table('email_contents')->insert([
+            'template' => '----',
+            'email_id' => 1,
+            'language_id' => 1
+        ]);
+
+        DB::table('email_contents')->insert([
+            'template' => '----',
+            'email_id' => 1,
+            'language_id' => 2
+        ]);
+
+        DB::table('email_contents')->insert([
+            'template' => '----',
+            'email_id' => 2,
+            'language_id' => 1
+        ]);
+
+        DB::table('email_contents')->insert([
+            'template' => '----',
+            'email_id' => 2,
+            'language_id' => 2
         ]);
     }
 }

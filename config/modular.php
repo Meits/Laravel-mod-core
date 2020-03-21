@@ -17,6 +17,7 @@ return [
 
     'modules' => [
         'Admin' => [
+            'Contact',
             'Language',
             'Email',
             'Setting',
@@ -32,6 +33,7 @@ return [
 
         ],
         'Pub' => [
+            'Pages',
 
         ],
         'Common' => [
